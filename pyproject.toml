@@ -3,7 +3,13 @@ name = "python-exercises"
 version = "1.0.0"
 description = "A set of Python exercises for mathematicans."
 authors = ["ElliottSullingeFarrall <elliott.chalford@gmail.com>"]
-packages = [{ include = "exercises/*"}]
+packages = [
+    { from = "exercises", include = "apollonian-gaskets" },
+    { from = "exercises", include = "mandelbrot-fractal" },
+    { from = "exercises", include = "newton-fractal"     },
+    { from = "exercises", include = "solar-sym"          },
+    { from = "exercises", include = "ulam-spiral"        },
+]
 
 [tool.poetry.dependencies]
 python = "^3.11"
