@@ -7,11 +7,11 @@ authors = ["ElliottSullingeFarrall <elliott.chalford@gmail.com>"]
 readme = "README.md"
 repository = "https://github.com/ElliottSullingeFarrall/python-exercises"
 packages = [
-    { from = "exercises", include = "apollonian-gaskets" },
-    { from = "exercises", include = "mandelbrot-fractal" },
-    { from = "exercises", include = "newton-fractal"     },
-    { from = "exercises", include = "solar-sym"          },
-    { from = "exercises", include = "ulam-spiral"        },
+  { from = "exercises", include = "apollonian-gaskets" },
+  { from = "exercises", include = "mandelbrot-fractal" },
+  { from = "exercises", include = "newton-fractal" },
+  { from = "exercises", include = "solar-sym" },
+  { from = "exercises", include = "ulam-spiral" },
 ]
 
 [tool.poetry.dependencies]
@@ -28,11 +28,11 @@ astropy = "^6.0.0"
 snakeviz = "^2.2.0"
 
 [tool.poetry.scripts]
-apollonian-gaskets  = "apollonian-gaskets:run"
-mandelbrot-fractal  = "mandelbrot-fractal:run"
-newton-fractal      = "newton-fractal:run"
-solar-sym           = "ulam-spiral:run"
-ulam-spiral         = "ulam-spiral:run"
+apollonian-gaskets = "apollonian-gaskets:run"
+mandelbrot-fractal = "mandelbrot-fractal:run"
+newton-fractal = "newton-fractal:run"
+solar-sym = "solar-sym:run"
+ulam-spiral = "ulam-spiral:run"
 
 [build-system]
 requires = ["poetry-core"]
