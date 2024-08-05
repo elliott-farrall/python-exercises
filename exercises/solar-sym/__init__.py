@@ -13,9 +13,8 @@ from numpy.linalg import norm
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 
-import sys
 import os
-os.chdir(sys.path[0])
+os.chdir(os.path.join(os.path.dirname(__file__)))
 
 BODY_SCALE = 250
 CANVAS_SIZE = 2.5e11
@@ -32,13 +31,13 @@ class Body:
 
         if id is not None:
             self.id = id
-        elif name is not None and x is not None and v is not None: 
+        elif name is not None and x is not None and v is not None:
             self.name = name
             self.x = array(x)
             self.v = array(v)
         else:
             raise ValueError('Missing required arguments')
-        
+
 
     def force(self, *others):
         return sum(- G * self.m * other.m / norm(self.x - other.x)**3 * (self.x - other.x) for other in others)
@@ -50,8 +49,8 @@ class System:
         for body in bodies:
             if body.id is not None:
                 dat = Horizons(id=body.id, location='@SSB', epochs=Time(self.t.isoformat(), format='isot', scale='utc').jd)
-                eph = dat.ephemerides()
-                vec = dat.vectors()
+                eph = dat.ephemerides() # type: ignore
+                vec = dat.vectors() # type: ignore
 
                 body.name = eph['targetname'][0]
                 body.x = array([vec['x'][0], vec['y'][0]])      * au
@@ -76,7 +75,7 @@ class System:
         ax.set_ylim(-CANVAS_SIZE, +CANVAS_SIZE)
         ax.axis('off')
 
-        unit_convert = lambda s: ax.transData.transform([s,0])[0] - ax.transData.transform([0,0])[0] 
+        unit_convert = lambda s: ax.transData.transform([s,0])[0] - ax.transData.transform([0,0])[0] # noqa: E731
 
         scatter = ax.scatter(
             [body.x[0] for body in self.bodies.values()],
@@ -94,16 +93,15 @@ class System:
                 [body.x[0] for body in self.bodies.values()],
                 [body.x[1] for body in self.bodies.values()]
             )))
-            date.set_text(f'DATE {self.t.strftime("%Y-%m-%d")}') 
+            date.set_text(f'DATE {self.t.strftime("%Y-%m-%d")}')
 
             return scatter, date
 
-        anim = FuncAnimation(fig, update, tqdm(range(int(TIME_END / TIME_STEP / STEPS_PER_FRAME))), blit=True, cache_frame_data=False)
+        anim = FuncAnimation(fig, update, tqdm(range(int(TIME_END / TIME_STEP / STEPS_PER_FRAME))), blit=True, cache_frame_data=False) # type: ignore
         anim.save('assets/simulation.gif', writer='pillow', dpi=450, fps=60)
 
-
-if __name__ == '__main__':
-    sun     = Body(
+def run():
+    sun = Body(
         id = '10',
         colour = 'yellow',
         r = 695700e3,
@@ -115,19 +113,19 @@ if __name__ == '__main__':
         r = 2439.4e3,
         m = 3.302e23
     )
-    venus   = Body(
+    venus = Body(
         id = '299',
         colour = 'orange',
         r = 6051.84e3,
         m = 48.685e24
     )
-    earth   = Body(
+    earth = Body(
         id = '399',
         colour = 'blue',
         r = 6371.01e3,
         m = 5.97219e24
     )
-    mars    = Body(
+    mars = Body(
         id = '499',
         colour = 'red',
         r = 3389.92e3,
@@ -139,13 +137,13 @@ if __name__ == '__main__':
         r = 69911e3,
         m = 1.89818722e27
     )
-    saturn  = Body(
+    saturn = Body(
         id = '699',
         colour = 'yellow',
         r = 58232e3,
         m = 5.6834e26
     )
-    uranus  = Body(
+    uranus = Body(
         id = '799',
         colour = 'cyan',
         r = 25362e3,
@@ -157,7 +155,7 @@ if __name__ == '__main__':
         r = 25362e3,
         m = 86.813e24
     )
-    pluto   = Body(
+    pluto = Body(
         id = '999',
         colour = 'grey',
         r = 1188.3e3,
@@ -167,4 +165,5 @@ if __name__ == '__main__':
     system = System(sun, mercury, venus, earth, mars, jupiter, saturn, uranus, neptune, pluto)
     system.draw()
 
-    
+if __name__ == '__main__':
+    run()

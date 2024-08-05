@@ -12,24 +12,49 @@
             "command": "poetry run 'python -m cProfile -o ${fileDirname}/${fileBasenameNoExtension}.prof ${file} && snakeviz ${fileDirname}/${fileBasenameNoExtension}.prof'"
         },
         {
-            "label": "Run Script",
+            "label": "Run Script (apollonian-gaskets)",
             "type": "shell",
-            "command": "poetry run python ${file}",
+            "command": "poetry run apollonian-gaskets",
             "problemMatcher": [],
             "group": {
-                "kind": "build",
-                "isDefault": true
+                "kind": "build"
             }
         },
         {
-            "label": "Install Module from Selection",
+            "label": "Run Script (mandelbrot-fractal)",
             "type": "shell",
-            "command": "poetry add ${selectedText}"
+            "command": "poetry run mandelbrot-fractal",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build"
+            }
         },
         {
-            "label": "Uninstall Module from Selection",
+            "label": "Run Script (newton-fractal)",
             "type": "shell",
-            "command": "poetry remove ${selectedText}"
+            "command": "poetry run newton-fractal",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build"
+            }
+        },
+        {
+            "label": "Run Script (solar-sym)",
+            "type": "shell",
+            "command": "poetry run solar-sym",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build"
+            }
+        },
+        {
+            "label": "Run Script (ulam-spiral)",
+            "type": "shell",
+            "command": "poetry run ulam-spiral",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build"
+            }
         }
     ]
 }

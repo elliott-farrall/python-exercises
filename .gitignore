@@ -1,6 +1,7 @@
 .venv
 .direnv
+.pre-commit-config.yaml
 
 __pycache__
-
-*.prof
+.mypy_cache
+.ruff_cache

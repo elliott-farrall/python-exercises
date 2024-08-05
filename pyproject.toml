@@ -1,8 +1,11 @@
 [tool.poetry]
 name = "python-exercises"
-version = "1.0.0"
+version = "1.0"
 description = "A set of Python exercises for mathematicans."
+license = "MIT"
 authors = ["ElliottSullingeFarrall <elliott.chalford@gmail.com>"]
+readme = "README.md"
+repository = "https://github.com/ElliottSullingeFarrall/python-exercises"
 packages = [
     { from = "exercises", include = "apollonian-gaskets" },
     { from = "exercises", include = "mandelbrot-fractal" },
@@ -12,16 +15,24 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.10"
 numpy = "^1.26.4"
 matplotlib = "^3.8.3"
-snakeviz = "^2.2.0"
 scipy = "^1.12.0"
 sympy = "^1.12"
 tqdm = "^4.66.2"
 astroquery = "^0.4.7"
 astropy = "^6.0.0"
 
+[tool.poetry.group.dev.dependencies]
+snakeviz = "^2.2.0"
+
+[tool.poetry.scripts]
+apollonian-gaskets  = "apollonian-gaskets:run"
+mandelbrot-fractal  = "mandelbrot-fractal:run"
+newton-fractal      = "newton-fractal:run"
+solar-sym           = "ulam-spiral:run"
+ulam-spiral         = "ulam-spiral:run"
 
 [build-system]
 requires = ["poetry-core"]
